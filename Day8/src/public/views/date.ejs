@@ -1,0 +1,9 @@
+<h3>To Display Wheather It is a WeekDay Or WeekEnd</h3>
+   <% const date=new Date();%>
+   <br>
+   <%=date%>
+   <%var dato=date.getDay()%>
+   <%var day;%>
+<%if((dato===6)||(dato===0)){day="WeekEnd"}else{day="WeekDay"}%>
+<br>
+<h4><%=day%></h4>

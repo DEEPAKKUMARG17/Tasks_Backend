@@ -1,0 +1,40 @@
+<%var a=datam%>
+<h1 style="text-align: center;">Object Name in Capital</h1>
+<div style="display: flex; justify-content: center;">
+    <div style="display: flex; flex-direction: column;">
+        <ul>
+            <%a.forEach((val)=>{%>
+                <li><%=val.name.toUpperCase()%></li>
+                <%})%><br>
+            </ul>
+            <h1>Displaying Details in table format</h1>
+            <table border="2px">
+                <tr>
+                    <th>Name</th>
+                    <th>salary</th>
+                </tr>
+            
+                    <%a.forEach((val)=>{%>
+                        <tr>
+                        <td><%=val.name.toUpperCase()%></td>
+                        <td><%=val.salary%></td>
+                         </tr>
+                        <%})%>
+         </table>
+         <br>
+ <h1>Displaying sum of Array as a props </h1>
+<% var sum=0;%>
+<%peta.forEach((val)=>{%>
+    <%=val%>
+    <%})%>
+    <%peta.forEach((val)=>{%>
+        <%sum+=val%>
+        <%})%>
+   <br> <h3>Sum of Digits :<%=sum%></h3><br>
+   
+    </div>
+    
+</div>
+
+  
+ 
