@@ -1,0 +1,365 @@
+const http = require('http')
+const formidable = require('formidable');
+const fs = require('fs')
+http.createServer(function (req, res){
+    // res.write("Welcome")
+    // res.write("Ganesh")
+    // console.log("karthik")
+    res.writeHead(200, { 'Content-Type': 'text/html' })
+    if(req.url=='/fileuploaded'){
+        var form =new formidable.IncomingForm();
+        form.parse(req,(err,fields,files)=>{
+            var oldpath=files.filetoupload[0].filepath;
+            console.log(oldpath)
+            var newpath=__dirname+'/'+files.filetoupload[0].originalFilename
+            fs.rename(oldpath,newpath,(err)=>{
+                console.log(oldpath)
+                // if(oldpath === undefined)
+                //     res.write("Enter something")
+                if(err) 
+                    throw err;
+                res.write("File Uploaded");
+                res.end();
+            })
+            
+        })
+    }else{
+        res.write("<form action='fileuploaded' method='post' enctype='multipart/form-data'>")
+        res.write("Select a file")
+        res.write("<br/>")
+        res.write("<input type='file' name='filetoupload'>")
+        res.write("<br/>")
+        // res.write("<input type='submit'  value='submit'>")
+        res.write("<button type='submit'>Submit</button>")
+        res.write("</form>")
+        res.end()
+    }
+}).listen(8080,()=>{
+    console.log("server is running")}
+)
+
+
+// const express = require('express');
+// const app = express();
+// const MongoClient = require('mongodb').MongoClient;
+// const objId = require('mongodb').ObjectId;
+// const url="mongodb://0.0.0.0:27017/mydb"
+// const client=new MongoClient(url);
+// const fs=require('fs');
+
+// const data=fs.createReadStream('data.txt','utf-8');
+// data.on('readable',function(){
+//    console.log(data.read(),"Yoga");
+// });
+
+// const events = require('events');
+// const eventEmit=new events.EventEmitter();
+
+// eventEmit.on('screen',function(_,x){
+//     console.log(" screen event Listened1",x)
+// })
+
+// eventEmit.on('screen',function(x,y,z){
+//     console.log(" screen event Listened2",x,y,z)
+// })
+
+// eventEmit.emit('screen',5,6,67)
+
+// _____________________________________________________________________________________________________________________________________________________
+
+
+// const path = require('path');
+
+// console.log(path.join('ganesh','karthik'));
+// console.log(path.join(__dirname,'data.txt'));
+// console.log(path.dirname('./NODESTART/admin.js'));
+
+// fs.readFile('fsOperation.txt',(err,res)=>{
+//     if(err){
+//         console.log(err);
+//     }
+//     else{
+//         console.log(res.toString());
+//     }
+// })
+
+// fs.writeFile('fsOperation.txt','hello',(err,res)=>{
+//     if(err){
+//         console.log(err);
+//     }
+//     else{
+//         console.log("written ");
+//     }
+// })
+
+// fs.appendFile('fsOperation.txt','Krishna',(err,res)=>{
+//     if(err){
+//         console.log(err);
+//     }
+//     else{
+//         console.log("written ");
+//     }
+// })
+
+// fs.unlink('fsOperation.txt',(err,res)=>{
+//     if(err){
+//         console.log(err);
+//     }
+//     else{
+//         console.log("deleted");
+//     }
+// })
+
+// console.log(mongodb)
+// client.connect(url).then(()=>{
+//     console.log('Connected to MongoDB');
+//     const NewDb=client.db("mydb");
+//     const coll=NewDb.collection("myNewCollection")
+    
+//     // coll.insertMany([{name:"Ganesh",salary:23000,age:19},{name:"Yogashree",salary:20000,age:19},{name:"Keerthi",salary:33000,age:21},{name:"krishna",age:16}]).then(()=>{
+//     //     console.log('Inserted');
+//     // });
+
+//     coll.deleteOne({_id: new objId("64d9ba8573f21f8a474d7a30")}).then(()=>{
+//         console.log("Successfully deleted")
+//     })
+
+//     // coll.find({_id: new objId("64d9ba8573f21f8a474d7a30")}).toArray().then((res)=>{
+//     //     console.log(res)
+//     // })
+//     // NewDb.createCollection("myNewCollection")
+//     console.log('Created new collection');
+
+// })
+
+// app.get("/", (req, res) => { 
+// })
+
+// app.get("/test", (req, res) => { 
+// })
+
+// app.get("/hello", (req, res) => { 
+
+// })
+
+// app.post("/hello", (req, res) => { 
+// })
+
+// app.delete("/hello", (req, res) => { 
+// })
+
+// app.put("/hello", (req, res) => { 
+// })
+
+// app.post("/:name/:age",(req,res)=>{
+    
+//     var user = req.params.name;
+//     var age = req.params.age;
+//     age = age + ""
+//     if(!(user.trim() == "" || age.trim() == "")) {
+//         var flag=0,flag1=0;
+//         for(let a of user){
+//             if(a.toUpperCase()===a.toLowerCase())
+//             {
+//                 flag=1
+//                 break;
+//             }
+//         }
+
+//         for(let a of age){
+//             if(a.toUpperCase()!==a.toLowerCase())
+//             {
+//                 flag1=1;
+//                 break;
+//             }
+//         }
+
+//         if(flag === 0 && flag1 == 0){
+//             age=parseFloat(age)
+//             res.send({user,age})
+//         }else{
+//             res.send("Failure")
+//         }
+//     }
+//     else
+//     {
+//         res.send("Failure")
+//     }
+// })
+// const admin=require('./admin');
+// const bodyparser=require('body-parser');
+// const app = express(); //initialising express application
+// app.use(bodyparser.json());
+// app.use(bodyparser.text());
+
+// app.use(bodyparser.urlencoded({extended: true}));
+
+// // app.get('/search/:name/:age',(req,res)=>{
+// //     if(req.params.age>30)
+// //         res.send(req.params.age)
+// //     else
+// //         res.send(req.params.name)
+// // });
+// app.post('/search/:name/:age',(req,res)=>{
+//     var name=req.params.name;
+//     var age=req.params.age;
+//     var name1=req.body.name;
+//     var salary1=req.body.salary;
+//     // console.log(name);
+//     if(req.body.ganesh){
+//         // res.send("Error")
+//         console.log("Error")
+//     }
+//     else{
+//     res.send({name,name1,age,salary1});
+
+//     }
+  
+
+
+       
+// });
+// // app.post('/', function(req, res){
+// //     // var name=req.body.name;
+// //     // var salary=req.body.salary;
+// //     // if(!name && !salary){
+// //     //     res.status(404).send("Error");
+// //     // }
+// //     // else{
+// //         res.status(200).send(req.body);
+// //     // }
+// // })
+
+// // const errorHandler = require('./ErrorHandler');
+// // app.use("/admin",admin);
+// // app.use('/search', (req,res,next)=>{
+// //     console.log("hello world",req,res);
+// //     next();
+// // })
+// // const getUser=()=>undefined;
+// // app.get("/",(req,res,next)=>{
+// //     try{
+// //         const user=getUser();
+// //         if(!user){
+// //             throw new Error("User not found");
+// //         }
+
+// //     }
+// //     catch(error){
+// //         next(error);
+// //     }
+// // })
+// // app.use(errorHandler);
+// // app.get("/", (req, res, next)=>{
+// //     setTimeout(()=>{
+// //         try{
+// //             console.log("Async code example")
+// //             throw new Error("Async code example");
+// //         }
+// //         catch(error){
+// //             console.log("catch")
+// //             next(error);
+// //         }
+// //     },1000)
+// // })
+// // app.get('/search', function(req, res){
+// //     console.log("welcome");
+// //     // res.end()
+// //     res.send("<b>welcome from res.send</b>");
+// // })
+
+// // const authenticate=(req,res,next)=>{
+// //     const random=(min,max)=>Math.floor(Math.random()*(max-min))+min;
+// //     const isAuthenticated =random(0,2);
+// //     if(isAuthenticated){
+// //         next();
+// //     }
+// //     else{
+// //         res.send("User is not authenticated")
+// //     }
+// // }
+// // app.get("/",authenticate,function(req,res){
+// //     res.send("Welcome");
+// // })
+
+
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")
+
+// app.listen(3000,()=>console.log('server is listening on'))
+// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+// // console.log(__dirname)
+// // console.log("DOne")// // const area=require("./Mod1.js");
+// // // console.log(area.a)
+
+// // console.log(area)
+// // console.log("Welcome to Backend")
+// // console.log(__filename)
+
+// // conso
+
