@@ -1,0 +1,146 @@
+//App.js
+
+import logo from './logo.svg';
+import './App.css';
+import {Operation} from './Operation'
+import { Filter } from './Operation';
+import { Product } from './Operation';
+import { ProductNumber } from './Operation';
+import Form from './Form';
+
+function App() {
+  
+  return (
+    <>
+    <Operation data={"deepak"} />
+    <Filter fil={[1,2,3,4,5,6,7,8,9,10]}/>
+    <Product a={2} b={3}/>
+    <Form/>
+    <ProductNumber/>
+    </>
+    
+    
+  );
+}
+
+export default App;
+
+
+
+operation.js
+
+
+import React from "react";
+
+//1.Take a string as props and return the string in uppercase
+function Operation(props) 
+{
+    return (
+ <h1>{props.data.toUpperCase()}</h1>
+    );
+}
+
+//2.Take a array as a props and filter out even number from the array
+
+function Filter(props) 
+{
+     
+
+  return <ul>
+    {props.fil.map((val)=>
+    {
+        if(val%2==0)
+        {
+            return <li>{val}</li>
+        }
+    })}
+  </ul>
+}
+function Product(props) 
+{
+    return(
+        <h1>{props.a*props.b}</h1>
+    )
+
+}
+ 
+//3. create a form which should accept 2 numbers from user and display their product
+function ProductNumber()
+{
+    let num1ref=React.createRef();
+    let num2ref=React.createRef();
+    let valueRef=React.createRef();
+    return (
+        <div className="data">
+        <h5>Product of Number</h5>
+        <form className="dk" onSubmit={displayproduct}>
+            <input type="number" ref={num1ref}/>
+            <input type="number" ref={num2ref}/>
+            <input type="submit"/>
+            <p ref={valueRef}></p>
+        </form>
+        </div>
+    )
+    function displayproduct(e)
+{
+    e.preventDefault();
+    valueRef.current.innerHTML=parseInt((num1ref.current?.value||1)*(num2ref.current?.value||1))
+     
+       
+}
+} 
+export {Operation};
+export  {Filter};
+export {Product};
+export{ProductNumber}
+
+
+
+form.js
+
+
+import React from 'react';
+
+/*4.create a form which should accept name and password you have to validate whether 
+the name and password are not empty and password should be min 5 character in length*/
+function Form()
+{
+    const inputref=React.createRef();
+    const passordRef=React.createRef();
+    let inputName=React.createRef();
+    let inputpassword=React.createRef();
+
+    function display(e)
+    {
+        e.preventDefault();
+        
+        if((inputref.current.value==""))
+        {
+            alert("enter data")
+        }
+        else if(passordRef.current.value=="")
+        {
+            alert("enter password")
+        }
+        else
+        {
+           
+           inputName.current.innerText=inputref.current.value 
+           inputpassword.current.innerText=passordRef.current.value
+        }
+       
+    }
+    return (
+        <div className='data'>
+            <h5>Form validation</h5>
+        <form className="dk" onSubmit={display}>
+            <input type="text" ref={inputref}/>
+            <input type="password" ref={passordRef} maxLength={5}/>
+            <input type="submit"/>
+        </form>
+        <p ref={inputName}></p>
+        <p ref={inputpassword}></p>
+        </div>
+    );
+}
+export default Form;

@@ -1,0 +1,16 @@
+{
+  "name": "day3",
+  "version": "1.0.0",
+  "description": "day3 task mongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "DEEPAKKUMAR.G",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongodb": "^5.7.0"
+  }
+}
