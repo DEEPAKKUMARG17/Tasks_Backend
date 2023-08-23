@@ -54,15 +54,18 @@ var id = req.params.id;
    
 })
 
-app.get('/edit/:id',(req, res,next)=>{
+app.post('/edit/:id',(req, res,next)=>{
     var id = req.params.id;
+    var val=req.body.input;
     var o_id=new ObjectId(id);
-    add.find({_id:o_id}).toArray().then((data)=>{
-        res.render('edit',{data:data})
-    }).catch((error)=>
-    {
-        console.log(error)
+   
+
+    add.updateOne({_id:new ObjectId(req.body._id)},{$set:{name:val}}).then(()=>{
+        console.log('updated')
+        res.redirect('/')
     })
+})
+    
     app.post('/edit',(req,res)=>{
             add.updateOne({_id:new ObjectId(req.body._id)},{$set:{
                  name:req.body.name,
@@ -72,7 +75,7 @@ app.get('/edit/:id',(req, res,next)=>{
          })
   
 
-})
+
 app.listen(8000,(req,res)=>
 {
     console.log('listening on');
