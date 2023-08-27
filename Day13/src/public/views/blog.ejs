@@ -1,0 +1,68 @@
+<body style="text-align: center;">
+    <h1 style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Blogs</h1>
+    <div>
+      <form action="/admin" method="post">
+         <input type="submit" value="AdminLogin" style="width: 100px; height: 40px; border-radius:25px; border-style: none;
+ color: white;
+ background-color: #4CAF50;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;">
+      </form>
+       <%data.forEach((val,index)=>{%>
+        <h1><%=(index+1)%>.<%=val.title%></h1>
+           <p ><%=val.content%></p>
+           <img src="<%=val.img%>" alt="img"><br><br>
+           <%if(name){%>
+           <form action="/userset" method="post" id="form">
+            <textarea name="comment" id="comment" value="<%=val.comment%>" cols="30" rows="10" style="border-radius: 10px;"></textarea>
+          <!-- <input type="text" name="comment" value="<%=val.comment%>"> -->
+          <input type="hidden" name="pat" value="<%=(index+1)%>">
+          <input type="hidden" name="tiles" value="<%=(val.title)%>">
+          <input type="hidden" name="namer" value="<%=name%>"><br><br>
+          <input type="submit" name="submit" value="comment" id="submit"
+          style="width: 100px; height: 40px; border-radius:25px; border-style: none;
+ color: white;
+ background-color:#8F00FF;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;">
+       </form>
+       <%}else{%>
+         <form action="/login" method="post" id="form">
+            <textarea name="username" id="username" value="<%=val.comment%>" disabled="true" cols="30" rows="10" style="border-radius: 10px;"></textarea><br><br>
+            <!-- <input type="text" name="username"  disabled="true"> -->
+            <input type="submit" name="submit" value="submit" id="submit"
+            style="width: 100px; height: 40px; border-radius:25px; border-style: none;
+ color: white;
+ background-color:#8F00FF;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;">
+         </form>
+         <%}%>
+         <%drive.map((item)=>{%>
+          <%if((val.title===item.title)){%>
+            <h6>Uername:<%=item.users %></h6>
+            <h6>Comment:<%=item.comment %></h6>
+          <%}%>
+         <%})%>     
+           
+<%})%>
+         </div>
+    <script>
+      
+    </script>
+</body>
